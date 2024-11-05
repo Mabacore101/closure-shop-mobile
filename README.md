@@ -46,18 +46,152 @@
 ### 4. Jelaskan perbedaan antara const dengan final.
 #### Jawab: Const digunakan untuk mendefinisikan suatu variabel konstan pada waktu kode dikompilasi. Setelah variabel const didefinisikan, variabel ini tidak bisa diubah lagi setelah didefinisikan. Selain itu, const biasa digunakan ketika kita sudah tahu nilai dari suatu variabel konstanta. Di sisi lain, final digunakan untuk mendefinisikan suatu variabel konstan pada waktu kode berjalan. Sama seperti variabel const, variabel final juga tidak bisa berubah setelah didefinisikan. Selain itu, final biasa digunakan ketika kita ingin membuat suatu variabel konstan setelah menajalankan suatu fungsi, misalnya buat konstan setelah panggil class ItemHomePage.
 
-### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist-checklist di atas.
-#### Jawab: 
-#### a. Checklist 1: Membuat sebuah program Flutter baru dengan tema E-Commerce yang sesuai dengan tugas-tugas sebelumnya.
-#### b. Checklist 2: Membuat tiga tombol sederhana dengan ikon dan teks untuk:
-#### i. Melihat daftar produk (Lihat Daftar Produk)
-#### ii. Menambah produk (Tambah Produk)
-#### iii. Logout (Logout)
-#### c. Mengimplementasikan warna-warna yang berbeda untuk setiap tombol (Lihat Daftar Produk, Tambah Produk, dan Logout).
-#### d. Memunculkan Snackbar dengan tulisan:
-#### i. "Kamu telah menekan tombol Lihat Daftar Produk" ketika tombol Lihat Daftar Produk ditekan.
-#### ii. "Kamu telah menekan tombol Tambah Produk" ketika tombol Tambah Produk ditekan.
-#### iii. "Kamu telah menekan tombol Logout" ketika tombol Logout ditekan. 
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist-checklist di atas. 
+### a. Checklist 1: Membuat sebuah program Flutter baru dengan tema E-Commerce yang sesuai dengan tugas-tugas sebelumnya. 
+#### Jawab: Pertama, saya masuk ke direktori khusus pengembangan aplikasi Flutter. Kemudian, saya jalankan perintah `flutter create closure_shop` dan cd ke dalam direktori closure_shop. Kemudian, saya coba pakai hp untuk uji coba aplikasi dengan perintah `flutter run`. Kemudian, saya jalankan perintah `git init` di direktori closure_shop. Kemudian saya jalankan perintah `git remote add origin [URL ke repo closure-shop-mobile]` dan lakukan `add-commit-push`. 
+
+### b. Checklist 2: Membuat tiga tombol sederhana dengan ikon dan teks untuk:
+### i. Melihat daftar produk (Lihat Daftar Produk)
+### ii. Menambah produk (Tambah Produk)
+### iii. Logout (Logout)
+#### Jawab: Pertama, saya class ItemHomePage untuk menampung nama dan ikon menjadi suatu objek. 
+```
+class ItemHomepage {
+    final String name;
+    final IconData icon;
+
+    ItemHomepage(this.name, this.icon);
+}
+```
+#### Kemudian, saya buat daftar tombol di kelas MyHomePage.
+```
+...
+final List<ItemHomepage> items = [
+         ItemHomepage("Lihat Daftar Produk", Icons.shopping_cart),
+         ItemHomepage("Tambah Produk", Icons.add),
+         ItemHomepage("Logout", Icons.logout),
+    ];
+...
+```
+#### Terakhir, saya ikut kode tutorial untuk membuat kelas ItemCard untuk tampilkan semua tombol. Intinya kode ini berguna untuk menyusun urutan tombol serta keluar pesan di bawah layar ketika tombol ditekan.
+```
+...
+class ItemCard extends StatelessWidget {
+  // Menampilkan kartu dengan ikon dan nama.
+
+  final ItemHomepage item; 
+  final Color color;
+  
+  const ItemCard(this.item, this.color, {super.key}); 
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      // Menentukan warna latar belakang dari tema aplikasi.
+      color: color,
+      // Membuat sudut kartu melengkung.
+      borderRadius: BorderRadius.circular(12),
+      
+      child: InkWell(
+        // Aksi ketika kartu ditekan.
+        onTap: () {
+          // Menampilkan pesan SnackBar saat kartu ditekan.
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+            );
+        },
+        // Container untuk menyimpan Icon dan Text
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              // Menyusun ikon dan teks di tengah kartu.
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  item.icon,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                const Padding(padding: EdgeInsets.all(3)),
+                Text(
+                  item.name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  } 
+}
+```
+
+### c. Mengimplementasikan warna-warna yang berbeda untuk setiap tombol (Lihat Daftar Produk, Tambah Produk, dan Logout).
+#### Jawab: Pertama, saya coba cari pallete warna buat tiga tombol sehingga warnanya sinkron dan sesuai tema. Kemudian, saya buat suatu List di kelas MyHomePage untuk tampung warnanya.
+```
+final List<Color> itemColors = [
+    const Color(0xFFB19FB5), // warna untuk "Lihat Daftar Produk"
+    const Color(0xFF737AA7), // warna untuk "Tambahkan Produk"
+    const Color(0xFF79A0C4), // warna untuk "Logout"
+    ];
+```
+#### Kemudian, saya buat list tombol di children dengan indeks item tombol dan indeks warna dari itemColors.
+```
+...
+// Menampilkan ItemCard untuk setiap item dalam list items.
+                    children: [
+                      ItemCard(items[0], itemColors[0]), // "Lihat Daftar Produk" dengan warnanya
+                      ItemCard(items[1], itemColors[1]), // "Tambah Produk" dengan warnanya
+                      ItemCard(items[2], itemColors[2]), // "Logout" dengan warnanya
+                    ],
+...
+```
+#### Terakhir, saya modifikasi kode di kelas ItemCard supaya dia bisa terima parameter warna dan atur warna tombol.
+```
+...
+class ItemCard extends StatelessWidget {
+  // Menampilkan kartu dengan ikon dan nama.
+
+  final ItemHomepage item; 
+  final Color color;
+  
+  const ItemCard(this.item, this.color, {super.key}); 
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      // Menentukan warna latar belakang dari tema aplikasi.
+      color: color,
+...
+```
+#### Intinya adalah saya membuat list untuk warna, memasangkan tombol dengan satu warna, dan mengatur kelas ItemCard sehingga kelas tersebut bisa mengubah warna tombol dengan warna yang dipasangkan dengannya.
+
+### d. Memunculkan Snackbar dengan tulisan:
+### i. "Kamu telah menekan tombol Lihat Daftar Produk" ketika tombol Lihat Daftar Produk ditekan.
+### ii. "Kamu telah menekan tombol Tambah Produk" ketika tombol Tambah Produk ditekan.
+### iii. "Kamu telah menekan tombol Logout" ketika tombol Logout ditekan. 
+#### Jawab: Sebenarnya, fungsionalitas ini sudah ada di ItemCard, tetapi saya akan menjelaskan ulang di area sekitar Snackbar. Saya taruh kode ini dalam kelas InsertCard:
+```
+...
+onTap: () {
+          // Menampilkan pesan SnackBar saat kartu ditekan.
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+            );
+        },
+...
+```
+#### Intinya, kode ini akan menampilkan pesan ketika tombol Lihat Daftar Produk, Tambah Produk, atau Logout ditekan. Pesan yang ditampilkan adalah "Kamu telah menekan tombol ${tombol yang ditekan}!". Selain itu, kode ini juga mengatur urutan tampil dan bagaimana pesan ini disembunyikan. 
+
+### e. Menjawab beberapa pertanyaan berikut pada README.md pada root_folder.
+#### Jawab: Saya hanya salin pertanyaan dan menjawab pertanyaan tersebut satu per satu dalam README.md
 
 ##### Referensi: Tutorial 6 PBP, chatGPT
 

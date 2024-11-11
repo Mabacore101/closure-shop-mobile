@@ -193,7 +193,17 @@ onTap: () {
 ### e. Menjawab beberapa pertanyaan berikut pada README.md pada root_folder.
 #### Jawab: Saya hanya salin pertanyaan dan menjawab pertanyaan tersebut satu per satu dalam README.md
 
-##### Referensi: Tutorial 6 PBP, chatGPT
+### ===============TUGAS 8===============
+
+### 1. Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+#### Jawab: 
+
+### 2. Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+### 3. Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+### 4. Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+### 5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+
+##### Referensi: Tutorial (6, 7) PBP, chatGPT
 
 ## Getting Started
 

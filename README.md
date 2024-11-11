@@ -196,12 +196,61 @@ onTap: () {
 ### ===============TUGAS 8===============
 
 ### 1. Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
-#### Jawab: 
+#### Jawab: Kegunaan const di Flutter adalah membuat suatu variabel bersifat immutable (atau tidak bisa diubah), optimisasi dengan cara menggunakan ulang konstanta yang telah dibuat, serta kurangi runtime aplikasi karena variabelnya sudah dibuat sejak compile time sehingga tinggal dipakai. Keuntungan ketika menggunakan const pada kode flutter adalah optimisasi performa, efisiensi memori, kurangi jumlah instansiasi, dan memperjelas maksud. Penggunaan const bisa optimisasi performa dengan cara membuat sebuah konstanta ketika waktu kompilasi sehingga konstanta tersebut tinggal dipakai ulang. Penggunaan const dapat menghemat memori dengan cara membuat suatu objek sekali dan objek itu dapat dipakai ulang tanpa menimbulkan duplikasi. Penggunaan const dapat mengurangi jumlah kali kita instansiasi objek karena Flutter menghindari duplikat pada const. Terakhir, penggunaan const dapat memperjelas maksud kode kita dengan cara menetapkan suatu nilai menjadi permanen sehingga dapat dipakai ulang dengan jelas. Kita sebaiknya pakai const ketika kita ingin membuat widget immutable, nilai statis, objek yang dipakai terus-menerus, dan suatu koleksi data yang tidak akan berubah. Di sisi lain, kita sebaiknya tidak pakai const ketika kita ingin membuat suatu variabel yang dapat diubah setelah waktu kompilasi, derived values, dan membuat lebih dari satu instansi.
 
 ### 2. Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+#### Jawab: Column digunakan ketika kita ingin menyusun children dalam urutan atas ke bawah (vertikal). Column berguna ketika kita ingin susun tombol, teks, atau gambar dengan posisi atas ke bawah (vertikal). Di sisi lain, Row digunakan ketika kita ingin menyusun children secara kiri ke kanan (horizontal). Row berguna ketika kita ingin menyusun tombol, ikon, atau gambar secara kiri ke kanan (horizontal).
+```
+//Contoh implementasi Column (sisipan kode diambil dari left_drawer.dart):
+child: const Column(
+              children: [
+                Text(
+                  'Closure Shop',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(padding: EdgeInsets.all(8)),
+                Text(
+                  "Ayo beli bahan upgrade di sini!",
+                  textAlign: TextAlign.center, // Membuat posisi teks ke tengah.
+                  style: TextStyle(
+                    fontSize: 15,           // Atur ukuran font menjadi 15
+                    color: Colors.white,    // Ubah warna teks menjadi putih
+                    fontWeight: FontWeight.normal, // Atur font weight menjadi normal (default weight)
+                  ),
+                ),
+              ],
+            ),
+```
+```
+//Contoh implementasi Row (diambil dari menu.dart):
+Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InfoCard(title: 'NPM', content: npm),
+                InfoCard(title: 'Name', content: name),
+                InfoCard(title: 'Class', content: className),
+              ],
+            ),
+```
+
 ### 3. Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+#### Jawab: Saya pakai TextFormField sebagai elemen input pada halaman form di tugas kali ini. TextFormField adalah suatu elemen input yang memiliki dekorasinya sendiri, logika validasi, dan mampu simpan suatu state ketika value berubah. Flutter memiliki lebih dari satu elemen input selain TextFormField, berikut adalah beberapa contoh dari elemen input lainnya:
+#### a. Checkbox adalah elemen input yang memberikan pengguna pilihan untuk memilih lebih dari satu opsi dengan cara mencetang kotak di sebelah kiri dari label opsi.
+#### b. Radio Button adalah elemen input yang memberikan pengguna pilihan untuk memilih salah satu opsi dari rangkaian opsi dengan cara menekan lingkaran di sebelah kiri label.
+#### c. Dropdown Button adalah elemen input yang memberikan pengguna pilihan untuk memilih salah satu opsi dari rangkaian opsi dengan cara menekan tanda panah di kanan dan tekan label pilihan.
+#### d. Switch adalah elemen input yang memberikan pengguna pilihan untuk memilih salah satu dari dua opsi. 
+#### e. Slider adalah elemen input yang memberikan pengguna pilihan untuk memilih suatu angka dari suatu garis bilangan dengan cara menggeserkan sebuah slidernya, biasanya berbentuk lingkaran atau persegi panjang seperti slider volume atau brightness di hp.
+
 ### 4. Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+#### Jawab: Saya mengatur tema dalam aplikasi Flutter pada aplikasi yang saya buat dengan cara mengatur tema dari Material App. Isi dari tema (theme) tersebut adalah skema warna (colorScheme). Isi dari skema warna tersebut adalah warna oren dari yang paling terang sampai paling gelap sehingga saya dapat pilih warna oren yang mana yang akan dipakai. Pada akhirnya, saya pilih oren dengan nomor 500 untuk warna primer dan nomor 400 untuk warna sekunder. Dengan cara inilah, saya dapat memastikan tema dalam aplikasi Flutter saya konsisten. Saya ada mengimplementasikan tema pada aplikasi yang saya buat. 
+
 ### 5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+#### Jawab: Saya menangani navigasi dengan dua cara. Pertama, saya buat suatu side bar pada aplikasi saya sehingga pengguna dapat melakukan navigasi pada aplikasi saya. Kedua, saya atur masing-masing pilihan pada side bar untuk melakukan pengarahan (redirect) ke bagian aplikasi tertentu. Pada bagian home, saya pakai Navigator.pushReplacement supaya bagian ini jadi bagian permanen pada page stack. Pada bagian lainnya, seperti form, saya pakai Navigator.push supaya stack page bisa dipop setelah user tekan back pada hp. Dengan dua cara ini, saya dapat menangani naviigasi dalam aplikasi dengan banyak halaman pada Flutter.
 
 ##### Referensi: Tutorial (6, 7) PBP, chatGPT
 

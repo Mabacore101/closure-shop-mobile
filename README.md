@@ -252,7 +252,47 @@ Row(
 ### 5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
 #### Jawab: Saya menangani navigasi dengan dua cara. Pertama, saya buat suatu side bar pada aplikasi saya sehingga pengguna dapat melakukan navigasi pada aplikasi saya. Kedua, saya atur masing-masing pilihan pada side bar untuk melakukan pengarahan (redirect) ke bagian aplikasi tertentu. Pada bagian home, saya pakai Navigator.pushReplacement supaya bagian ini jadi bagian permanen pada page stack. Pada bagian lainnya, seperti form, saya pakai Navigator.push supaya stack page bisa dipop setelah user tekan back pada hp. Dengan dua cara ini, saya dapat menangani naviigasi dalam aplikasi dengan banyak halaman pada Flutter.
 
-##### Referensi: Tutorial (6, 7) PBP, chatGPT
+### ===============TUGAS 8===============
+
+### 1. Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?
+### 2. Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini
+### 3. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+### 4. Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.
+### 5. Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+### 6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+### a. Checklist 1: Memastikan deployment proyek tugas Django kamu telah berjalan dengan baik.
+#### Jawab: Saya hanya perlu uji coba fitur-fitur baru pada proyek tugas Django saya.
+
+### b. Checklist 2: Mengimplementasikan fitur registrasi akun pada proyek tugas Flutter.
+#### Jawab: Pertama, saya membuat fungsi register pada views.py aplikasi authentication di proyek Django. Kemudian, saya tambahkan path ke bagian register pada urls.py authentication. Kemudian, saya buat berkas register.dart dan tambahkan kode dari tutorial 8 sehingga fungsi register dapat bekerja. Terakhir, saya import register.dart ke login.dart sehingga pengguna mampu lakukan registrasi.
+
+### c. Checklist 3: Membuat halaman login pada proyek tugas Flutter.
+#### Jawab: Pertama, saya langsung ikut kode dari tutorial supaya ada halaman login. Halaman login dari tutorial sudah sangat baik sehingga saya tinggal ikuti dan ubah warnanya menjadi warna tema aplikasi saya. Gunanya login.dart adalah menerima masukkan kredensial dari pengguna dan verifikasi dengan kredensial di localhost tugas Django. Kemudian, saya ubah halaman utama dari MyHomePage menjadi halaman login.
+
+### d. Checklist 4: Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+#### Jawab: Pertama, saya buat app baru bernama authentication di tugas Django saya dan tambahkan ke bagian installed apps di settings.py. Kemudian, saya pip install django-cors-header, tambahkan django-cors-header ke requirements.txt dan tambahkan corsheader ke dalam installed apps di settings.py. Kemudian, saya tambahkan line ini `corsheaders.middleware.CorsMiddleware` ke MIDDLEWARE di settings.py. Kemudian, saya tambahkan beberapa variabel di bagian paling bawah settings.py. Kemudian, saya buat metode view untuk login pada authentication/views.py. Kemudian, saya buat urls.py untuk routing halaman login dalam aplikasi authentication. Kemudian, saya tambahkan `path('auth/', include('authentication.urls')), ` pada urls.py proyek (closure_shop). Kemudian, saya install package provider dan pbp_django_auth dalam tugas Flutter saya. Kemudian, saya modifikasi root widget untuk menyediakan CookieRequest library ke semua child widgets menggunakan Provider. Kemudian, saya isi berkas login.dart dengan kode dari tutorial supaya ada halaman login. Terakhir, saya ubah url menjadi localhost:8000 supaya kredensial yang dimasukkan dari Flutter bisa diperiksa dengan kredensial di localhost tugas Django.
+
+### e. Membuat model kustom sesuai dengan proyek aplikasi Django.
+#### Jawab: 
+
+### f. Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
+### i. Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
+#### Jawab: 
+
+### g. Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+### i. Halaman ini dapat diakses dengan menekan salah satu item pada halaman daftar Item.
+### ii. Tampilkan seluruh atribut pada model item kamu pada halaman ini.
+### iii. Tambahkan tombol untuk kembali ke halaman daftar item.
+#### Jawab:
+
+### h. Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.
+### i. Menjawab beberapa pertanyaan berikut pada README.md pada root folder (silakan modifikasi README.md yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
+#### Jawab: Saya hanya jawab pertanyaan pada tugas individu 9 dan taruh subjudul untuk tugas 9.
+
+### j. Melakukan add-commit-push ke GitHub.
+#### Jawab: Saya hanya lakukan git add, git commit, dan git push ke repo closure-shop dan closure-shop-mobile. 
+
+##### Referensi: Tutorial (6, 7, 8) PBP, chatGPT
 
 ## Getting Started
 

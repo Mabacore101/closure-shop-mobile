@@ -1,3 +1,4 @@
+import 'package:closure_shop/screens/list_productentry.dart';
 import 'package:flutter/material.dart';
 import 'package:closure_shop/screens/menu.dart';
 import 'package:closure_shop/screens/productentry_form.dart';
@@ -57,7 +58,7 @@ class LeftDrawer extends StatelessWidget {
 
           //Bagian untuk mengatur opsi Tambah Item dan routing ke halaman tambah item.
           ListTile(
-            leading: const Icon(Icons.shopping_cart),
+            leading: const Icon(Icons.add),
             title: const Text('Tambah Item'),
             // Bagian redirection ke ProductEntryFormPage
             onTap: () {
@@ -67,6 +68,19 @@ class LeftDrawer extends StatelessWidget {
                   builder: (context) => const ProductEntryFormPage(),
               ));
             },
+          ),
+
+          // Kode ListTile Menu
+          ListTile(
+              leading: const Icon(Icons.shopping_cart),
+              title: const Text('Daftar Produk'),
+              onTap: () {
+                  // Route menu ke halaman mood
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ProductEntryPage()),
+                  );
+              },
           ),
         ],
       ),

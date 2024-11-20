@@ -255,10 +255,20 @@ Row(
 ### ===============TUGAS 8===============
 
 ### 1. Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?
-### 2. Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini
+#### Jawab: Kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON karena beberapa alasan. Pertama, kita dapat menaruh sebuah type safety dan strong typing sehingga kita bisa mengurangi jumlah error ketika akses atribut. Kedua, penggunaan model dapat meningkatkan readability serta membuat kode kita lebih bersih sehingga lebih mudah untuk baca dan cari variable dalam kode. Ketiga, penggunaan model dapat memudahkan manipulasi data karena semua datanya sudah terstruktur dengan rapi dan kita dapat manipulasi data dengan Dart kemudian ubah balik jadi JSON. Kalau kita tidak membuat model terlebih dahulu, kita mungkin tidak langsung ketemu error langsung, tetapi error bisa dilihat nanti. Kita bisa melakukan typing ke tipe data yang salah seperti set tipe menjadi int padahal kita ambil String. Kalaupun kita tidak menemukan error, kode kita akan menjadi lebih susah dibaca, dimodifikasi, dan kita perlu parsing manual.
+
+### 2. Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini.
+#### Jawab: Library http hanya digunakan di library pbp_django_auth sebagai dependensi. Fungsi dari library ini adalah seperti berikut. Pertama, library http digunakan untuk membuat suatu request http dengan servis pada situs web. Kedua, library ini digunakan untuk mengatur respon dari server dengan format JSON, XML, atau teks biasa. Ketiga, library ini digunakan untuk mengirim data dalam request body dan bisa kirim data berupa JSON, data form, atau format lainnya.
+
 ### 3. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+#### Jawab: Fungsi dari CookieRequest adalah menyimpan cookie, mengirim cookie, dan mengatur cookie. Pertama, CookieRequest digunakan untuk menyimpan cookie. Sebuah server mengirim cookie yang disimpan oleh CookieRequest dalam memori. Kedua, CookieRequest digunakan untuk mengirim cookie. CookieRequest mampu mengirim cookie kembali ke server sehingga server bisa tahu sesi mana yang diakses. Ketiga, CookieRequest digunakan untuk mengatur cookie. CookieRequest mampu menyimpan dan mengirim cookie secara otomatis setiap kali cookie digunakan. Kita perlu membagikan instance CookieRequest ke semua komponen di aplikasi Flutter karena beberapa alasan. Pertama, CookieRequest perlu dibagikan untuk menjaga keberadaan sesi. Dengan cara membagikan CookieRequest, kita mampu menjaga dan mempertahankan sebuah sesi sehingga pengguna tidak perlu login setiap kali pindah ke halaman lain pada aplikasi. Kedua, CookieRequest perlu dibagikan untuk menjaga konsistensi cookie. Dengan cara membagikan CookieRequest, kita dapat memastikan bahwa kita akses sebuah cookie yang valid dan mencegah kesalahan mengakses sebuah cookie. Ketiga, CookieRequest perlu dibagikan untuk menyederhanakan kode. Bayangin kalau kita tidak membagi CookieRequest, kita perlu menyimpan, mengirim, dan mengatur sebuah cookie secara terpisah.
+
 ### 4. Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.
+#### Jawab: Pertama, Flutter akan meminta pengguna untuk memasukkan input ke dalam bagian input seperti TextFormField, Checkbox, Swtich, dll. Kedua, Flutter akan menyimpan state dari masukkan pengguna dengan bantuan StateFul Widget sehingga Flutter dapat merefleksikan perubahan ke pengguna sesuai dengan masukkan yang diberikan. Ketiga, Flutter akan melakukan validasi masukkan pengguna dengan peraturan yang diberikan. Keempat, Flutter akan menampilkan masukkan dari pengguna dengan antarmuka deklaratif sehingga Flutter dapat merefleksikan tampilan dengan masukkan pengguna. Kelima, Flutter menyediakan widget untuk mengambil data secara asinkron sehingga dapat dilakukan di belakang layar tanpa pengguna mengetahui. Terakhir, antar muka pada aplikasi Flutter akan berubah dengan menampilkan data dari pengguna sehingga pengguna dapat melihat hasilnya.
+
 ### 5. Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+#### Jawab: Pertama, pengguna lakukan registrasi dengan mengirim data seperti username dan password ke form register pada Flutter. Data ini diambil Flutter untuk tahap berikutnya. Kedua, data yang diambil Flutter akan dikirim ke Django melalui method POST untuk melakukan registrasi backend. Ketiga, data tersebut diolah oleh Django untuk membuat User baru dan kirimkan pesan berhasil kepada Flutter (kalau berhasil). Keempat, pengguna akan melakukan login pada aplikasi Flutter dengan memasukkan username dan password yang sudah dibuat. Kelima, Flutter akan mengirim data masukkan tersebut ke Django dengan method POST dan Django melakukan verifikasi apakah data yang dimasukkan sudah benar atau belum. Keenam, Django akan mengirim cookie ke Flutter apabila masukkan user seperti username dan password sudah benar. Ketujuh, pengguna akan diarahkan pada halaman menu setelah selesai login. Kedelapan, pengguna tekan tombol logout untuk keluar dari aplikasi. Pada tahap ini, Flutter akan menghapus cookie yang dikirim Django dan mengarahkan pengguna kembali ke halaman login. Selain itu, Django akan membuat sesi login pengguna tadi menjadi tidak valid pada sisi server.
+
 ### 6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
 ### a. Checklist 1: Memastikan deployment proyek tugas Django kamu telah berjalan dengan baik.
 #### Jawab: Saya hanya perlu uji coba fitur-fitur baru pada proyek tugas Django saya.
@@ -273,19 +283,21 @@ Row(
 #### Jawab: Pertama, saya buat app baru bernama authentication di tugas Django saya dan tambahkan ke bagian installed apps di settings.py. Kemudian, saya pip install django-cors-header, tambahkan django-cors-header ke requirements.txt dan tambahkan corsheader ke dalam installed apps di settings.py. Kemudian, saya tambahkan line ini `corsheaders.middleware.CorsMiddleware` ke MIDDLEWARE di settings.py. Kemudian, saya tambahkan beberapa variabel di bagian paling bawah settings.py. Kemudian, saya buat metode view untuk login pada authentication/views.py. Kemudian, saya buat urls.py untuk routing halaman login dalam aplikasi authentication. Kemudian, saya tambahkan `path('auth/', include('authentication.urls')), ` pada urls.py proyek (closure_shop). Kemudian, saya install package provider dan pbp_django_auth dalam tugas Flutter saya. Kemudian, saya modifikasi root widget untuk menyediakan CookieRequest library ke semua child widgets menggunakan Provider. Kemudian, saya isi berkas login.dart dengan kode dari tutorial supaya ada halaman login. Terakhir, saya ubah url menjadi localhost:8000 supaya kredensial yang dimasukkan dari Flutter bisa diperiksa dengan kredensial di localhost tugas Django.
 
 ### e. Membuat model kustom sesuai dengan proyek aplikasi Django.
-#### Jawab: 
+#### Jawab: Pertama, saya buka endpoint json tugas Django saya. Kemudian, saya salin semua isi json ke QuickType dengan nama ProductEntry dan Bahasa Dart. Kemudian, saya buat berkas product_entry.dart pada direktori lib/models dan salin semua kode dari QuickType ke berkas tersebut.
 
 ### f. Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
-### i. Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
-#### Jawab: 
+### i. Tampilkan name, price, dan description dari masing-masing item pada halaman ini.
+#### Jawab: Pertama, saya buat berkas list_productentry.dart dalam direktori lib/screens. Kemudian, saya impor library yang dibutuhkan dan salin kode tutorial. Kemudian, saya ubah kode tutorial sehingga list berisi daftar product dan tampilkan nama, harga, dan deskripsi produk. Terakhir, saya tambahkan routing ke halaman tersebut di left drawer dan atur rute lihat produk.
 
 ### g. Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
 ### i. Halaman ini dapat diakses dengan menekan salah satu item pada halaman daftar Item.
 ### ii. Tampilkan seluruh atribut pada model item kamu pada halaman ini.
 ### iii. Tambahkan tombol untuk kembali ke halaman daftar item.
-#### Jawab:
+#### Jawab: Pertama, saya buat berkas baru dengan nama product_details.dart. Kemudian, saya buat kelas ProductDetails yang extend Stateless Widget. Kemudian, saya buat constructor untuk kelas ProductDetails. Kemudian, saya build sebuah tombol balik untuk pop content detail produk dan sebuah body yang berisi nama, harga, dan deskripsi produk. Terakhir, saya tambahkan rute ke halaman ProductDetails.
 
 ### h. Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.
+#### Jawab: Sebenarnya, fitur ini sudah terimplementasi dari bagian model kustom. Hal ini bisa terjadi karena model kustom membutuhkan data user yang baru login sehingga produk seorang user hanya bisa dilihat oleh user tersebut saja dan tidak bisa dilihat oleh user lainnya.
+
 ### i. Menjawab beberapa pertanyaan berikut pada README.md pada root folder (silakan modifikasi README.md yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
 #### Jawab: Saya hanya jawab pertanyaan pada tugas individu 9 dan taruh subjudul untuk tugas 9.
 
@@ -293,6 +305,7 @@ Row(
 #### Jawab: Saya hanya lakukan git add, git commit, dan git push ke repo closure-shop dan closure-shop-mobile. 
 
 ##### Referensi: Tutorial (6, 7, 8) PBP, chatGPT
+##### Collaborator: Janssen Benedict
 
 ## Getting Started
 
